@@ -1,6 +1,19 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-    <route id="TIMER_ROUTE">
-        <from uri="timer://trigger"/>
-        <to uri="log:out"/>
+
+    <route errorHandlerRef="myDeadLetterErrorHandler" >
+        <from uri="direct:update-user"/>
+        <to uri="bean-validator://x"/>
+        <to uri="bean:userService?method=updateUser"/>
+        <setHeader headerName="Exchange.HTTP_RESPONSE_CODE">
+            <constant>204</constant>
+        </setHeader>
+        <setBody>
+            <constant></constant>
+        </setBody>
+    </route>
+
+    <route>
+        <from uri="direct:error"/>
+        <process ref="globalErrorHandler"/>
     </route>
 </routes>

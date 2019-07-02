@@ -30,3 +30,5 @@ camel:
   springboot:
     xmlRoutes: classpath:xml/*.xml
 #    xmlRests: classpath:rests/*.xml
+
+camel.component.servlet.mapping.context-path: /api/*
