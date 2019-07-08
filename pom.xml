@@ -7,12 +7,14 @@
     <groupId>com.camel</groupId>
     <artifactId>my-spring-boot-camel</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-boot-version>2.1.6.RELEASE</spring-boot-version>
         <spring-camel-version>2.24.1</spring-camel-version>
+        <swagger.version>3.22.2</swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -46,7 +48,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -90,6 +103,17 @@
             <artifactId>camel-test-spring</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.36</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -111,6 +135,24 @@
                 <artifactId>camel-maven-plugin</artifactId>
                 <version>${spring-camel-version}</version>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources combine.children="append">
+                        <resource>
+                            <directory>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger.version}</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                            <targetPath>swagger-ui</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>

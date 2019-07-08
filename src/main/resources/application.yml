@@ -37,3 +37,6 @@ spring:
   profiles:
     include:
       - HK
+server:
+  servlet:
+    context-path: /gebng

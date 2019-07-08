@@ -27,10 +27,10 @@
   <camelContext id="SampleCamel" xmlns="http://camel.apache.org/schema/spring" trace="true" >
     <routeContextRef ref="myCoolRoutes"/>
 
-    <route >
-      <from uri="timer:foo"/>
-      <to uri="log:foo" />
-    </route>
+<!--    <route >-->
+<!--      <from uri="timer:foo"/>-->
+<!--      <to uri="log:foo" />-->
+<!--    </route>-->
   </camelContext>
 
 </beans>
