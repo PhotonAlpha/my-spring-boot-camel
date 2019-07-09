@@ -28,6 +28,7 @@
             <route errorHandlerRef="myDeadLetterErrorHandler" >
                 <from uri="direct:update-user"/>
                 <process ref="studentProcessor" />
+                <process ref="student2Processor" />
                 <to uri="bean-validator://x"/>
                 <to uri="bean:userService?method=updateUser"/>
                 <setHeader headerName="Exchange.HTTP_RESPONSE_CODE">

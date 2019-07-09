@@ -37,4 +37,5 @@ spring:
   profiles:
     include:
       - SG
-
+  velocity:
+    resourceLoaderPath: classpath:/templates/
