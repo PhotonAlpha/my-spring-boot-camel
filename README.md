@@ -5,3 +5,7 @@ https://github.com/apache/camel/blob/master/examples/camel-example-spring-boot/s
 https://blog.csdn.net/yinwenjie/article/details/51692340
 
 https://camel.apache.org/spring-boot.html
+
+---
+freemarker:  
+https://nullbeans.com/spring-boot-freemarker-configuration-example/
